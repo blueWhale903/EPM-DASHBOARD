@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-function updateOptions(options) {
+function updateOptions(options: any) {
   const update = { ...options };
 
   const tokenCookie = cookies().get("x-auth-token");
