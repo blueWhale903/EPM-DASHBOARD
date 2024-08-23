@@ -1,27 +1,61 @@
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
 import {
   ArrowUpCircleIcon,
   ArrowDownCircleIcon,
 } from "@heroicons/react/24/outline";
-
-export function CardStat({ data, title }: { data: {}; title: string }) {
+import fetcher from "@/app/lib/fetcher";
+import Box from "@mui/material";
+import { Typography } from "@mui/material";
+export async function CardStat() {
+  const eventCount = await fetcher(
+    `${process.env.API}/statistics/events/count?month=1`
+  ).then((res) => res.json());
+  const participationCount = await fetcher(
+    `${process.env.API}/statistics/participations/count?month=1`
+  ).then((res) => res.json());
   return (
-    <Card className="py-4 w-full">
-      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-        <p className="text-tiny text-gray-500 uppercase">{title}</p>
-      </CardHeader>
-      <CardBody className="overflow-visible py-2">
-        <h3 className="text-4xl font-bold">{data.count}</h3>
-        <div className="flex items-center gap-1 mt-3">
-          {data.percentOfChange > 0 ? (
-            <ArrowUpCircleIcon className="w-4 text-green-400 h-auto" />
-          ) : (
-            <ArrowDownCircleIcon className="w-4 text-red-400 h-auto" />
-          )}
+    <div className="flex gap-2 w-full">
+      <Card sx={{ width: "100%" }}>
+        <CardHeader title="Total Events" />
+        <CardContent>
+          <Typography variant="h3" fontWeight={"bold"}>
+            {eventCount.data.count}
+          </Typography>
+          <div className="flex items-center gap-1 mt-3">
+            {eventCount.percentOfChange > 0 ? (
+              <ArrowUpCircleIcon className="w-4 text-green-400 h-auto" />
+            ) : (
+              <ArrowDownCircleIcon className="w-4 text-red-400 h-auto" />
+            )}
 
-          <p className="font-bold h-auto">{data.percentOfChange * 100}%</p>
-        </div>
-      </CardBody>
-    </Card>
+            <p className="font-bold h-auto">
+              {eventCount.data.percentOfChange * 100}%
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+      <Card sx={{ width: "100%" }}>
+        <CardHeader title="Total Participations" />
+        <CardContent>
+          <Typography variant="h3" fontWeight={"bold"}>
+            {participationCount.data.count}
+          </Typography>
+          <div className="flex items-center gap-1 mt-3">
+            {participationCount.percentOfChange > 0 ? (
+              <ArrowUpCircleIcon className="w-4 text-green-400 h-auto" />
+            ) : (
+              <ArrowDownCircleIcon className="w-4 text-red-400 h-auto" />
+            )}
+
+            <p className="font-bold h-auto">
+              {participationCount.data.percentOfChange * 100}%
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

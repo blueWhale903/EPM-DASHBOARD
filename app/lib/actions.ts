@@ -146,6 +146,8 @@ export async function login(
   currentState: { message: string },
   formData: FormData
 ) {
+  const cookieStore = cookies();
+
   const validatedFields = loginFormSchema.safeParse({
     username: formData.get("username"),
     password: formData.get("password"),
@@ -176,7 +178,7 @@ export async function login(
 
     const data = await res.json();
 
-    cookies().set("x-auth-token", data.token);
+    cookieStore.set("x-auth-token", data.token);
   } catch (error) {
     if (error instanceof Error) return { message: error.message };
   }

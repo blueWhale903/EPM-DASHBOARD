@@ -1,30 +1,22 @@
 export const dynamic = "force-dynamic";
-import EventsTable from "@/app/ui/events-ui/events-table";
-import EventsFilter from "@/app/ui/events-ui/events-filter";
-import { redirect, useSearchParams } from "next/navigation";
-import { unstable_noStore } from "next/cache";
-import { Suspense } from "react";
-import fetcher from "@/app/lib/fetcher";
-import EventsData from "@/app/ui/events-ui/events-data";
+import EventsTable from "@/app/ui/events-ui/events-data";
+import EventsFilter from "@/app/ui/events-ui/EventFilter";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { query: string };
-}) {
-  unstable_noStore();
+import { ListSkeleton } from "@/app/skeleton/list";
+import { Card } from "@/app/skeleton/card";
+import { Suspense } from "react";
+
+export default async function Page({ searchParams }: { searchParams: any }) {
   const params = new URLSearchParams(searchParams).toString();
 
-  const markCategory = await fetcher(`${process.env.API}/mark/categories`).then(
-    (res) => res.json()
-  );
-
   return (
-    <div className="">
-      <h1 className="text-4xl mb-4 font-bold">Events</h1>
-      <EventsFilter markCategory={markCategory.data} />
-      <Suspense key={params} fallback={"loading..."}>
-        <EventsData query={params} />
+    <div className="flex flex-col gap-2 w-full">
+      <h1 className="text-4xl font-bold">Events</h1>
+      <Suspense fallback={<Card />}>
+        <EventsFilter />
+      </Suspense>
+      <Suspense fallback={<ListSkeleton />}>
+        <EventsTable query={params.toString()} />
       </Suspense>
     </div>
   );

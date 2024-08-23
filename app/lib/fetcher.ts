@@ -12,6 +12,7 @@ function updateOptions(options: any) {
     update.headers = {
       ...update.headers,
       "x-auth-token": token,
+      headers: { "Content-Type": "application/json" },
     };
   }
 
