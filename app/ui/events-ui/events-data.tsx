@@ -16,7 +16,6 @@ export default async function EventsData({ query }: { query: string }) {
       return res.json();
     }
   });
-  console.log(res);
   if (!res) {
     return <ListSkeleton />;
   }

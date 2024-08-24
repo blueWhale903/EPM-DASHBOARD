@@ -30,7 +30,7 @@ export default async function Page({ searchParams }: { searchParams: any }) {
       },
     }
   ).then((res) => res.json());
-  console.log(participationInfo, events);
+
   return (
     <div className="flex flex-col w-full gap-5">
       <h1 className="text-4xl mb-4 font-bold">Participants</h1>

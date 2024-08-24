@@ -53,7 +53,7 @@ export default function DropdownFilter({
       target: { value },
     } = event;
     const params = new URLSearchParams(searchParams);
-    console.log(typeof value === "string" ? value.split(", ") : value);
+
     setSelectedKey(typeof value === "string" ? value.split(", ") : value);
     if (isMultiple) {
       params.set(filterName, `${Array.from(value).join(" ")}`);
