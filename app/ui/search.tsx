@@ -20,7 +20,7 @@ export default function Search({ query }: { query: string }) {
       params.delete(query);
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 100);
+  }, 300);
   return (
     <TextField
       id={query}
