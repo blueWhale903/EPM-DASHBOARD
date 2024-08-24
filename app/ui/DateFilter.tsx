@@ -1,6 +1,5 @@
 "use client";
 
-// import { DateRangePicker } from "@nextui-org/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DateRangePicker } from "@mui/x-date-pickers-pro";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -31,7 +30,7 @@ export default function DateFilter() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DateRangePicker
         onChange={(value, c) =>
-          handleDateFilter(value[0]?.unix(), value[1]?.unix())
+          handleDateFilter(value[0]?.valueOf(), value[1]?.valueOf())
         }
       />
     </LocalizationProvider>
