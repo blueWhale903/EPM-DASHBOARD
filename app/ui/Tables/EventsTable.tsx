@@ -15,17 +15,28 @@ import { formatDate } from "@/app/lib/utils";
 
 import { Event } from "@/model/models";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getFilteredEvents } from "@/app/lib/actions";
 
-export default function EventsTable({
-  data,
-  count,
-}: {
-  data: Event[];
-  count: number;
-}) {
+export default function EventsTable({ query }: { query: string }) {
   const searchParams = useSearchParams();
   const { replace, push } = useRouter();
   const pathname = usePathname();
+
+  const [events, setEvents] = useState<{
+    success: boolean;
+    data: { count: number; events: Event[] };
+    message: string;
+  }>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getFilteredEvents(query);
+      console.log(data);
+      setEvents(data);
+    };
+    fetchData();
+  }, [query]);
 
   const handlePagination = (
     event: React.ChangeEvent<unknown>,
@@ -35,6 +46,7 @@ export default function EventsTable({
     params.set("page", page.toString());
     replace(`${pathname}?${params.toString()}`);
   };
+
   return (
     <div className="flex flex-col gap-2 items-center">
       <TableContainer component={Paper}>
@@ -49,7 +61,7 @@ export default function EventsTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row: Event) => (
+            {events?.data.events.map((row: Event) => (
               <TableRow
                 key={row.id}
                 sx={{
@@ -71,7 +83,7 @@ export default function EventsTable({
         </Table>
       </TableContainer>
       <Pagination
-        count={Math.ceil(count / 10)}
+        count={Math.ceil((events?.data.count || 0) / 10)}
         onChange={handlePagination}
         sx={{ width: "full" }}
       />

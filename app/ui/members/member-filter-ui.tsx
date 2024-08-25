@@ -10,7 +10,7 @@ export default function MemberFilterUI({ classcodes }: { classcodes: any }) {
   const searchParams = useSearchParams();
   return (
     <div className="flex gap-2 justify-between mb-4 items-center">
-      <div className="flex gap-2 w-auto items-center">
+      <div className="flex flex-col md:flex-row gap-2 w-auto items-center">
         <div>
           <Search query="name" />
         </div>

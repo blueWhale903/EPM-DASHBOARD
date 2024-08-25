@@ -7,7 +7,7 @@ export async function Charts() {
     (res) => res.json()
   );
   return (
-    <div className="flex gap-2 w-full h-fit">
+    <div className="flex flex-col md:flex-row gap-2 w-full ">
       <EventsBar eventsCount={events.data.byMonths} />
       <CategoryChart categories={events.data.byCategories} />
     </div>

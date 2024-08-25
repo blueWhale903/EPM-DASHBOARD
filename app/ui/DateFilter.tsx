@@ -32,6 +32,7 @@ export default function DateFilter() {
         onChange={(value, c) =>
           handleDateFilter(value[0]?.valueOf(), value[1]?.valueOf())
         }
+        sx={{ borderRadius: "12px" }}
       />
     </LocalizationProvider>
   );

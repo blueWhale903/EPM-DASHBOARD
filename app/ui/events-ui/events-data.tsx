@@ -1,28 +1,29 @@
-"use server";
-
-import fetcher from "@/app/lib/fetcher";
-import { redirect } from "next/navigation";
+"use client";
 
 import EventTable from "../Tables/EventsTable";
-import { ListSkeleton } from "@/app/skeleton/list";
+import { useEffect, useState } from "react";
+import { getFilteredEvents } from "@/app/lib/actions";
+import { Event } from "@/model/models";
 
 export default async function EventsData({ query }: { query: string }) {
-  let res = await fetcher(
-    `${process.env.API}/events?limit=10&${query.replaceAll("%2B", "+")}`
-  ).then((res) => {
-    if (res.status == 403 || res.status == 400) {
-      redirect("/login");
-    } else {
-      return res.json();
-    }
-  });
-  if (!res) {
-    return <ListSkeleton />;
-  }
+  const [events, setEvents] = useState<{
+    success: boolean;
+    data: { count: number; events: Event[] };
+    message: string;
+  }>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getFilteredEvents(query);
+      console.log(data);
+      setEvents(data);
+    };
+    fetchData();
+  }, [query]);
 
   return (
     <div>
-      <EventTable data={res?.data.events} count={res?.data.count} />
+      {/* <EventTable data={events?.data.events} count={events?.data.count} /> */}
     </div>
   );
 }

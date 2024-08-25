@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 
 export default function Search({ query }: { query: string }) {
   const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const { replace, push } = useRouter();
   const pathname = usePathname();
 
   const handleSearch = useDebouncedCallback((e) => {
@@ -21,6 +21,7 @@ export default function Search({ query }: { query: string }) {
     }
     replace(`${pathname}?${params.toString()}`);
   }, 300);
+
   return (
     <TextField
       id={query}

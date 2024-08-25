@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Router } from "next/router";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -65,7 +66,7 @@ export default function DropdownFilter({
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 200, borderRadius: 12 }}>
+      <FormControl sx={{ width: 200, borderRadius: 12 }}>
         <InputLabel id="demo-multiple-name-label">{filterName}</InputLabel>
         <Select
           sx={{ borderRadius: 12 }}
@@ -77,7 +78,7 @@ export default function DropdownFilter({
           input={<OutlinedInput label={filterName} />}
           MenuProps={MenuProps}
         >
-          {values.map((value) => (
+          {values?.map((value) => (
             <MenuItem
               key={value}
               value={value}

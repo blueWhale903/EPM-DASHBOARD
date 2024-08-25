@@ -190,3 +190,24 @@ export async function logout() {
   cookies().delete("x-auth-token");
   redirect("/login");
 }
+
+export async function getCategories() {
+  const data = fetcher(`${process.env.API}/mark/categories`).then((res) => {
+    return res.json();
+  });
+
+  return data;
+}
+
+export async function getFilteredEvents(query: string) {
+  let data = await fetcher(
+    `${process.env.API}/events?limit=10&${query.replaceAll("%2B", "+")}`
+  ).then((res) => {
+    if (res.status == 403 || res.status == 400) {
+      redirect("/login");
+    } else {
+      return res.json();
+    }
+  });
+  return data;
+}

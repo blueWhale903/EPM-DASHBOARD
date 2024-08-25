@@ -1,12 +1,12 @@
 export const dynamic = "force-dynamic";
-import EventsTable from "@/app/ui/events-ui/events-data";
+import EventsTable from "@/app/ui/Tables/EventsTable";
 import EventsFilter from "@/app/ui/events-ui/EventFilter";
 
 import { ListSkeleton } from "@/app/skeleton/list";
 import { Card } from "@/app/skeleton/card";
 import { Suspense } from "react";
 
-export default async function Page({ searchParams }: { searchParams: any }) {
+export default function Page({ searchParams }: { searchParams: any }) {
   const params = new URLSearchParams(searchParams).toString();
 
   return (

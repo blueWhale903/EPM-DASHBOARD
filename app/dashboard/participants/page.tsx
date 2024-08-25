@@ -35,7 +35,7 @@ export default async function Page({ searchParams }: { searchParams: any }) {
     <div className="flex flex-col w-full gap-5">
       <h1 className="text-4xl mb-4 font-bold">Participants</h1>
       <div className="bg-white px-4 py-2 rounded-xl shadow-md">
-        <div className="flex gap-3 flex-wrap items-center">
+        <div className="flex gap-3 flex-wrap items-center justify-start">
           <Search query="id" />
           <DropdownFilter
             values={["23-24", "22-23", "21-22"]}
