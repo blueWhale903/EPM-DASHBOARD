@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { isValidJWT } from "../lib/utils";
-import LoginForm from "../ui/login-form";
+import LoginForm from "../ui/forms/LoginForm";
 import { redirect } from "next/navigation";
 
 export default async function Page() {

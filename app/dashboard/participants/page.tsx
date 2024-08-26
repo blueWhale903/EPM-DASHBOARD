@@ -1,8 +1,8 @@
-import Search from "@/app/ui/search";
-import DropdownFilter from "@/app/ui/Buttons/dropdown-filter";
+import Search from "@/app/ui/filters/Search";
+import DropdownFilter from "@/app/ui/filters/DropdownFilter";
 import { redirect } from "next/navigation";
 import fetcher from "@/app/lib/fetcher";
-import ParticipationTable from "@/app/ui/Tables/ParticipationTable";
+import ParticipationTable from "@/app/ui/tables/ParticipationTable";
 
 export default async function Page({ searchParams }: { searchParams: any }) {
   const events = await fetcher(

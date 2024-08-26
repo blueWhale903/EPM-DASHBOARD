@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@mui/material";
-import { SubmitButton } from "../Buttons/submit";
+import { SubmitButton } from "../buttons/Submit";
 import { createMember } from "@/app/lib/actions";
 import { useFormState } from "react-dom";
 import { TextField } from "@mui/material";

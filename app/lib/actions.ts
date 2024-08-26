@@ -2,9 +2,10 @@
 
 import { z } from "zod";
 import { revalidatePath, unstable_noStore } from "next/cache";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 import { cookies } from "next/headers";
 import fetcher from "./fetcher";
+import { useRouter } from "next/router";
 
 const loginFormSchema = z.object({
   username: z.string().min(1, "Username is required"),
@@ -123,10 +124,11 @@ export async function updateMember(
   }
 
   revalidatePath("/dashboard/members");
-  redirect("/dashboard/members");
+  redirect("/dashboard/members", RedirectType.replace);
 }
 
 export async function deleteMember(id: string) {
+  unstable_noStore();
   try {
     await fetcher(`${process.env.API}/members`, {
       method: "DELETE",
@@ -135,11 +137,11 @@ export async function deleteMember(id: string) {
       },
       body: JSON.stringify({ student_id: id }),
     }).then((res) => res.json());
+    revalidatePath("/dashboard/members");
+    return { message: "Deleted Member" };
   } catch (error) {
     console.error(`DELETE MEMBER ERROR: ${error}`);
   }
-
-  revalidatePath("/dashboard/members");
 }
 
 export async function login(
@@ -210,4 +212,34 @@ export async function getFilteredEvents(query: string) {
     }
   });
   return data;
+}
+
+export async function getClassCodes() {
+  let res = await fetcher(`${process.env.API}/classcodes`).then((res) =>
+    res.json()
+  );
+  return res.data;
+}
+
+export async function getMembers(query: string) {
+  let res = await fetcher(`${process.env.API}/members?${query}`).then((res) =>
+    res.json()
+  );
+
+  return res.data;
+}
+
+export async function getParticipants(id: string, page: number | 1) {
+  let res = await fetcher(
+    `${process.env.API}/events/${id}/participants?page=1`
+  ).then((res) => res.json());
+  return res.data;
+}
+
+export async function getEventById(id: string) {
+  let res = await fetcher(`${process.env.API}/events/${id}`).then((res) =>
+    res.json()
+  );
+
+  return res.data;
 }

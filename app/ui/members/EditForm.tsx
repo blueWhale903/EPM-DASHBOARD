@@ -5,7 +5,7 @@ import { useFormState } from "react-dom";
 import { Member } from "@/app/lib/definitions";
 import { TextField } from "@mui/material";
 import { Typography } from "@mui/material/";
-import { SubmitButton } from "../Buttons/submit";
+import { SubmitButton } from "../buttons/Submit";
 export default function Form({
   classCodes,
   member,

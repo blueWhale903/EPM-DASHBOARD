@@ -1,14 +1,11 @@
-import { Prociono } from "next/font/google";
-import fetcher from "../lib/fetcher";
-import { CardStat } from "../ui/charts/cards";
-import EventsBar from "../ui/charts/events-chart";
-import CategoryChart from "../ui/charts/category-chart";
+import { CardStat } from "../ui/charts/Cards";
 import { Suspense } from "react";
-import { Charts } from "../ui/charts/charts";
-import { CardStatSkeleton } from "../skeleton/card";
+import { Charts } from "../ui/charts/Charts";
+import { CardStatSkeleton } from "../ui/skeleton/Card";
 import Container from "@mui/material/Container";
 import { Box } from "@mui/material";
-import { ChartSkeleton } from "../skeleton/chart";
+import { ChartSkeleton } from "../ui/skeleton/Chart";
+
 export default async function Page() {
   return (
     <Container

@@ -1,25 +1,9 @@
 "use client";
 
-import { Button } from "@mui/material";
-import { login } from "../lib/actions";
+import { login } from "../../lib/actions";
 import { useFormState, useFormStatus } from "react-dom";
 import { TextField } from "@mui/material";
-
-function SubmitButton() {
-  const data = useFormStatus();
-  return (
-    <>
-      <Button
-        variant="contained"
-        sx={{ background: "#006fee", color: "#fff" }}
-        type="submit"
-        disabled={data.pending}
-      >
-        {data.pending ? "loading..." : "Login"}
-      </Button>
-    </>
-  );
-}
+import { SubmitButton } from "../buttons/Submit";
 
 export default function LoginForm() {
   const initState = {
@@ -49,7 +33,7 @@ export default function LoginForm() {
           defaultValue=""
           required
         />
-        <SubmitButton></SubmitButton>
+        <SubmitButton name="Login"></SubmitButton>
         {formState?.message && (
           <p className="text-[#ff5555] text-center">{formState.message}</p>
         )}

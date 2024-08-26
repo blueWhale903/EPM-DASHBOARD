@@ -1,9 +1,8 @@
-export const dynamic = "force-dynamic";
-import EventsTable from "@/app/ui/Tables/EventsTable";
-import EventsFilter from "@/app/ui/events-ui/EventFilter";
+import EventsTable from "@/app/ui/events/EventsTable";
+import EventsFilter from "@/app/ui/events/EventFilter";
 
-import { ListSkeleton } from "@/app/skeleton/list";
-import { Card } from "@/app/skeleton/card";
+import { ListSkeleton } from "@/app/ui/skeleton/List";
+import { Card } from "@/app/ui/skeleton/Card";
 import { Suspense } from "react";
 
 export default function Page({ searchParams }: { searchParams: any }) {

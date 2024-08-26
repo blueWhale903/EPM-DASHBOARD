@@ -1,4 +1,4 @@
-import Form from "@/app/ui/members/create-form";
+import Form from "@/app/ui/members/CreateForm";
 import { cookies } from "next/headers";
 import fetcher from "@/app/lib/fetcher";
 

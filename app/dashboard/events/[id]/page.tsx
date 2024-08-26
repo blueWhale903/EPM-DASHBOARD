@@ -1,6 +1,7 @@
-import { ListSkeleton } from "@/app/skeleton/list";
-import Participations from "@/app/ui/events-ui/participations";
+import { ListSkeleton } from "@/app/ui/skeleton/List";
 import { Suspense } from "react";
+import ParticipantTable from "@/app/ui/events/ParticipantsTable";
+import EventInfo from "@/app/ui/events/EventInfo";
 
 export default async function Page({
   params,
@@ -12,7 +13,8 @@ export default async function Page({
   return (
     <div className="flex flex-col gap-2">
       <Suspense fallback={<ListSkeleton />}>
-        <Participations id={params.id} page={searchParams.page} />
+        <EventInfo id={params.id} />
+        <ParticipantTable id={params.id} page={searchParams.page} />
       </Suspense>
     </div>
   );

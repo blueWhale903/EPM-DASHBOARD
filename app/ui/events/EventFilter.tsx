@@ -1,9 +1,8 @@
 "use client";
 
-import fetcher from "@/app/lib/fetcher";
-import DropdownFilter from "../Buttons/dropdown-filter";
-import Search from "../search";
-import DateFilter from "../DateFilter";
+import DropdownFilter from "../filters/DropdownFilter";
+import Search from "../filters/Search";
+import DateFilter from "../filters/DateFilter";
 import { useEffect, useState } from "react";
 import { getCategories } from "@/app/lib/actions";
 
@@ -16,12 +15,10 @@ export default function EventsFilter() {
         (e: { category: string }) => e.category
       );
       setCategories(categories);
-      console.log(categories);
     };
     fetchData();
   }, []);
 
-  // if (categories.length == 0) return <div>loading...</div>;
   return (
     <div className="flex gap-2 flex-wrap items-center bg-white p-4 rounded-md shadow-md">
       <Search query="name" />

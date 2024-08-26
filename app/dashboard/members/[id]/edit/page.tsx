@@ -1,7 +1,7 @@
 import { Member } from "@/app/lib/definitions";
 import { getMemberById } from "@/app/lib/actions";
 import { unstable_noStore } from "next/cache";
-import Form from "@/app/ui/members/edit-form";
+import Form from "@/app/ui/members/EditForm";
 import fetcher from "@/app/lib/fetcher";
 
 export default async function Page({ params }: { params: { id: string } }) {

@@ -32,7 +32,6 @@ export default function EventsTable({ query }: { query: string }) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getFilteredEvents(query);
-      console.log(data);
       setEvents(data);
     };
     fetchData();

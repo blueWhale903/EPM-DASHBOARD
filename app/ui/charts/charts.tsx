@@ -1,6 +1,6 @@
 import fetcher from "@/app/lib/fetcher";
-import EventsBar from "./events-chart";
-import CategoryChart from "./category-chart";
+import EventsBar from "./EventsChart";
+import CategoryChart from "./CategoryChart";
 
 export async function Charts() {
   const events = await fetcher(`${process.env.API}/statistics/events`).then(

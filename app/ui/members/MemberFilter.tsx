@@ -1,13 +1,26 @@
 "use client";
 
-import Search from "../search";
+import Search from "../filters/Search";
 import { Button } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import DropdownFilter from "../Buttons/dropdown-filter";
+import DropdownFilter from "../filters/DropdownFilter";
+import { useEffect, useState } from "react";
+import { getClassCodes } from "@/app/lib/actions";
 
-export default function MemberFilterUI({ classcodes }: { classcodes: any }) {
+export default function MemberFilter() {
   const searchParams = useSearchParams();
+
+  const [classcodes, setClassCodes] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getClassCodes();
+      setClassCodes(data);
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="flex gap-2 justify-between mb-4 items-center">
       <div className="flex flex-col md:flex-row gap-2 w-auto items-center">
@@ -19,7 +32,7 @@ export default function MemberFilterUI({ classcodes }: { classcodes: any }) {
         </div>
         <div>
           <DropdownFilter
-            values={classcodes.map((classcode: any) => classcode.name)}
+            values={classcodes?.map((classcode: any) => classcode.name)}
             filterName="classcode"
             isMultiple={false}
           />

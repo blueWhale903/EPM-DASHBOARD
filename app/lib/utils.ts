@@ -2,7 +2,9 @@
 
 import jwt from "jsonwebtoken";
 
-export function formatDate(dateStr: string) {
+export function formatDate(dateStr: string | undefined) {
+  if (!dateStr) return;
+
   const date = new Date(dateStr);
 
   const day = String(date.getUTCDate()).padStart(2, "0");
