@@ -19,7 +19,7 @@ export default function CategoryChart({ categories }: { categories: {} }) {
     ],
   };
   return (
-    <div className="bg-white rounded-lg mt-2 p-3 shadow-md w-[50%]">
+    <div className="bg-white rounded-lg mt-2 p-3 shadow-md md:w-[30%]">
       <Pie
         data={data}
         options={{
@@ -28,6 +28,9 @@ export default function CategoryChart({ categories }: { categories: {} }) {
             title: {
               display: true,
               text: "Events by categories",
+            },
+            legend: {
+              display: false,
             },
           },
         }}

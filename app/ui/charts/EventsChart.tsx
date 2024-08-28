@@ -20,7 +20,7 @@ export default function EventsBar({ eventsCount }: { eventsCount: {} }) {
     ],
   };
   return (
-    <div className="bg-white rounded-lg mt-2 p-3 shadow-md w-[70%]">
+    <div className="bg-white rounded-lg mt-2 p-3 shadow-md md:w-[70%]">
       <Bar
         data={data}
         options={{
@@ -29,6 +29,9 @@ export default function EventsBar({ eventsCount }: { eventsCount: {} }) {
             title: {
               display: true,
               text: "Events organized by months",
+            },
+            legend: {
+              display: false,
             },
           },
           scales: {
